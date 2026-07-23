@@ -1,0 +1,74 @@
+# Check upstream mediaplayer repo for new releases
+# If a new version is found, trigger the build-fpk workflow
+name: Check Upstream
+
+on:
+  schedule:
+    # Every 6 hours (UTC 00:00, 06:00, 12:00, 18:00 / Beijing 08:00, 14:00, 20:00, 02:00)
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      force_build:
+        description: 'Force build even if release already exists'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  UPSTREAM_REPO: kuai410022283/mediaplayer
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.check.outputs.version }}
+      should_build: ${{ steps.check.outputs.should_build }}
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check latest upstream release
+        id: check
+        run: |
+          # Get latest release from upstream repo
+          LATEST=$(curl -s "https://api.github.com/repos/${UPSTREAM_REPO}/releases/latest" | \
+            python3 -c "import sys,json; print(json.load(sys.stdin).get('tag_name',''))")
+
+          if [ -z "${LATEST}" ]; then
+            echo "::error::Failed to fetch upstream release info"
+            exit 1
+          fi
+
+          echo "Upstream latest: ${LATEST}"
+
+          # Check if this repository already has a release for this tag
+          IS_RELEASED=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${LATEST}" | \
+            python3 -c "import sys,json; print('yes' if json.load(sys.stdin).get('tag_name') else 'no')")
+
+          FORCE="${{ inputs.force_build }}"
+
+          if [ "${IS_RELEASED}" = "yes" ] && [ "${FORCE}" != "true" ]; then
+            echo "Release ${LATEST} already exists on this repository. Skipping build."
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "Triggering build for version: ${LATEST}"
+            echo "version=${LATEST}" >> $GITHUB_OUTPUT
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          fi
+
+  build_fpk:
+    needs: check
+    if: ${{ needs.check.outputs.should_build == 'true' }}
+    permissions:
+      contents: write
+      actions: write
+      id-token: write
+    uses: ./.github/workflows/build-fpk.yml
+    with:
+      mediaplayer_version: ${{ needs.check.outputs.version }}
+    secrets: inherit

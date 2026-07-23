@@ -1,0 +1,14 @@
+appname               = mediaplayer
+version               = 1.1.10
+display_name          = "${common.displayName}"
+desc                  = "${common.desc}"
+platform              = all
+source                = thirdparty
+maintainer            = Laok
+maintainer_url=https://github.com/kuai410022283/mediaplayer
+distributor           = laok
+distributor_url=https://github.com/kuai410022283/mediaplayer
+desktop_uidir         = ui
+desktop_applaunchname = mediaplayer.Application
+reloadui              = yes
+ctl_stop              = true

@@ -1,0 +1,233 @@
+name: Build FPK
+
+on:
+  workflow_dispatch:
+    inputs:
+      mediaplayer_version:
+        description: 'mediaplayer version (e.g. v1.1.10)'
+        required: true
+        type: string
+  push:
+    tags:
+      - 'v*'
+  workflow_call:
+    inputs:
+      mediaplayer_version:
+        description: 'mediaplayer version (e.g. v1.1.10)'
+        required: true
+        type: string
+
+env:
+  MEDIAPLAYER_REPO: kuai410022283/mediaplayer
+  PACKAGE_NAME: mediaplayer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          VERSION_INPUT="${{ inputs.mediaplayer_version || github.event.inputs.mediaplayer_version }}"
+          if [ -n "$VERSION_INPUT" ]; then
+            TAG_VERSION="$VERSION_INPUT"
+          else
+            TAG_VERSION="${GITHUB_REF#refs/tags/}"
+          fi
+
+          # Ensure leading v for tag, and strip v for raw version number
+          if [[ "$TAG_VERSION" != v* ]]; then
+            TAG_VERSION="v${TAG_VERSION}"
+          fi
+          RAW_VERSION="${TAG_VERSION#v}"
+
+          echo "tag_version=${TAG_VERSION}" >> $GITHUB_OUTPUT
+          echo "raw_version=${RAW_VERSION}" >> $GITHUB_OUTPUT
+          echo "Building for Tag: ${TAG_VERSION} (Raw version: ${RAW_VERSION})"
+
+      - name: Download upstream mediaplayer releases
+        run: |
+          TAG_VERSION="${{ steps.version.outputs.tag_version }}"
+          
+          # 1. Download amd64 release
+          AMD64_FILE="mediaplayer-linux-amd64.tar.gz"
+          AMD64_URL="https://github.com/${MEDIAPLAYER_REPO}/releases/download/${TAG_VERSION}/${AMD64_FILE}"
+          echo "Downloading amd64: ${AMD64_URL}"
+          curl -fSL -o "${AMD64_FILE}" "${AMD64_URL}"
+
+          mkdir -p tmp_amd64
+          tar xzf "${AMD64_FILE}" -C tmp_amd64 --strip-components=1
+
+          # 2. Download arm64 release
+          ARM64_FILE="mediaplayer-linux-arm64.tar.gz"
+          ARM64_URL="https://github.com/${MEDIAPLAYER_REPO}/releases/download/${TAG_VERSION}/${ARM64_FILE}"
+          echo "Downloading arm64: ${ARM64_URL}"
+          curl -fSL -o "${ARM64_FILE}" "${ARM64_URL}"
+
+          mkdir -p tmp_arm64
+          tar xzf "${ARM64_FILE}" -C tmp_arm64 --strip-components=1
+
+          # 3. Copy binaries to package structure
+          mkdir -p package/app/server
+          cp tmp_amd64/mediaplayer package/app/server/mediaplayer_x86_64
+          cp tmp_arm64/mediaplayer package/app/server/mediaplayer_aarch64
+          chmod +x package/app/server/mediaplayer_x86_64
+          chmod +x package/app/server/mediaplayer_aarch64
+
+          # 4. Copy web assets to package/app/www
+          mkdir -p package/app/www
+          if [ -d tmp_amd64/web ]; then
+            cp -r tmp_amd64/web/* package/app/www/
+            echo "Web files successfully copied to package/app/www/"
+          else
+            echo "::warning::No web directory found in upstream release"
+          fi
+          mkdir -p package/app/www/download
+
+          # 5. Config template
+          if [ -f tmp_amd64/config.yaml ]; then
+            cp tmp_amd64/config.yaml package/app/server/config.yaml.template
+          fi
+
+          # 6. Version file
+          RAW_VERSION="${{ steps.version.outputs.raw_version }}"
+          echo "${RAW_VERSION}" > package/app/server/version
+
+          echo "=== package/app/server contents ==="
+          ls -la package/app/server/
+          echo "=== package/app/www contents ==="
+          ls -la package/app/www/
+
+      - name: Update manifest version & fix line endings
+        run: |
+          RAW_VERSION="${{ steps.version.outputs.raw_version }}"
+          
+          # Update version in manifest
+          sed -i "s/^version[[:space:]]*=.*/version               = ${RAW_VERSION}/" package/manifest
+          
+          # Convert Windows CRLF line endings to LF
+          find package/ -type f \( -name "manifest" -o -name "index.cgi" -o -name "config" \) -exec sed -i 's/\r$//' {} + 2>/dev/null || true
+          find package/cmd package/config package/wizard package/i18n -type f -exec sed -i 's/\r$//' {} + 2>/dev/null || true
+
+          echo "=== Updated Manifest ==="
+          cat package/manifest
+
+      - name: Download fnpack packaging tool
+        run: |
+          FNPACK_URL="https://static2.fnnas.com/fnpack/fnpack-1.0.4-linux-amd64"
+          echo "Downloading fnpack from ${FNPACK_URL}"
+          curl -fSL -o fnpack "${FNPACK_URL}"
+          chmod +x fnpack
+          ./fnpack --help || ./fnpack version || true
+
+      - name: Build fnOS FPK package
+        id: build_fpk
+        run: |
+          RAW_VERSION="${{ steps.version.outputs.raw_version }}"
+          FPK_FINAL_NAME="${PACKAGE_NAME}_all_v${RAW_VERSION}.fpk"
+
+          echo "Building package using fnpack..."
+          ./fnpack build --directory package
+
+          # Detect built .fpk file name
+          BUILT_FPK=$(ls *.fpk package/*.fpk 2>/dev/null | head -n 1)
+          if [ -z "${BUILT_FPK}" ]; then
+            echo "ERROR: No .fpk file generated by fnpack!"
+            exit 1
+          fi
+
+          echo "Found generated package: ${BUILT_FPK}"
+          mv "${BUILT_FPK}" "${FPK_FINAL_NAME}"
+
+          sha256sum "${FPK_FINAL_NAME}" > "${FPK_FINAL_NAME}.sha256"
+
+          echo "fpk_path=${FPK_FINAL_NAME}" >> $GITHUB_OUTPUT
+          echo "fpk_name=${FPK_FINAL_NAME}" >> $GITHUB_OUTPUT
+
+          echo "=== Package Build Success ==="
+          ls -lh "${FPK_FINAL_NAME}" "${FPK_FINAL_NAME}.sha256"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fnos-fpk-package
+          path: |
+            ${{ steps.build_fpk.outputs.fpk_name }}
+            ${{ steps.build_fpk.outputs.fpk_name }}.sha256
+          retention-days: 5
+
+      - name: Create Release with retry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -x
+          TAG_VERSION="${{ steps.version.outputs.tag_version }}"
+          RAW_VERSION="${{ steps.version.outputs.raw_version }}"
+
+          # Confirm fpk file exists
+          FPK_COUNT=$(ls *.fpk 2>/dev/null | wc -l)
+          if [ "${FPK_COUNT}" -eq 0 ]; then
+            echo "ERROR: No .fpk files found for release!"
+            exit 1
+          fi
+
+          # Generate release notes
+          cat > /tmp/release-notes.md << NOTES
+          fnOS (飞牛应用) App Package for MediaPlayer
+
+          ### Version Information
+          - Version: \`${TAG_VERSION}\`
+          - Architecture: Universal / Multi-arch (\`x86_64\` and \`aarch64\`)
+
+          ### Installation
+          1. Download the \`mediaplayer_all_v${RAW_VERSION}.fpk\` package below.
+          2. Open fnOS (飞牛 NAS) App Center → Manual Install / 开发导入.
+          3. Select the downloaded \`.fpk\` file and follow the wizard instructions.
+          NOTES
+
+          # Clean up existing release/tag if force triggered
+          echo "Cleaning up existing release/tag $TAG_VERSION if exists..."
+          gh release delete "$TAG_VERSION" --repo "${{ github.repository }}" --yes 2>/dev/null || true
+          git push origin ":refs/tags/$TAG_VERSION" 2>/dev/null || true
+          sleep 2
+
+          # Create release and upload assets with retries
+          for i in 1 2 3 4 5; do
+            echo "=== Attempt $i: Creating release $TAG_VERSION ==="
+            if gh release create "$TAG_VERSION" --repo "${{ github.repository }}" \
+              --title "MediaPlayer fnOS $TAG_VERSION" \
+              --notes-file /tmp/release-notes.md \
+              --draft=false \
+              --prerelease=false \
+              *.fpk *.sha256; then
+              echo "=== Release created successfully ==="
+              gh release view "$TAG_VERSION" --repo "${{ github.repository }}"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 15s..."
+            sleep 15
+          done
+          echo "ERROR: All attempts to create release failed"
+          exit 1
+
+      - name: Upload missed assets (fallback)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG_VERSION="${{ steps.version.outputs.tag_version }}"
+          for file in *.fpk *.sha256; do
+            for i in 1 2 3 4 5; do
+              echo "Upload attempt $i for $file"
+              gh release upload "$TAG_VERSION" --repo "${{ github.repository }}" "$file" --clobber && break
+              sleep 15
+            done
+          done

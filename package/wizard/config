@@ -1,0 +1,31 @@
+[
+    {
+        "stepTitle": "${config.stepTitle}",
+        "items": [
+            {
+                "type": "tips",
+                "helpText": "${config.helpText}"
+            },
+            {
+                "type": "text",
+                "field": "server_port",
+                "label": "${config.portLabel}",
+                "initValue": "",
+                "placeholder": "${config.portPlaceholder}",
+                "rules": [
+                    { "pattern": "^[0-9]*$", "message": "${config.portPatternMsg}" }
+                ]
+            },
+            {
+                "type": "password",
+                "field": "admin_password",
+                "label": "${config.passwordLabel}",
+                "initValue": "",
+                "placeholder": "${config.passwordPlaceholder}",
+                "rules": [
+                    { "min": 6, "max": 64, "message": "${config.passwordLengthMsg}" }
+                ]
+            }
+        ]
+    }
+]
