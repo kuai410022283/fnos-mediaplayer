@@ -1,0 +1,37 @@
+[common]
+displayName="MediaPlayer"
+desc="""<b>MediaPlayer</b> 스마트 TV 스트리밍 미디어 센터로, 방대하고 복잡한 M3U 라이브 소스와 EPG 전자 프로그램 가이드를 케이블 TV처럼 매끄럽고 정리된 시청 경험으로 변환합니다. 서버 측 인증 및 프록시 메커니즘을 통해 핫링크 및 패킷 캡처 위험을 줄입니다.<br/><br/><b>⚡ 주요 기능</b><br/>📝 <b>보안 방어 (핫링크 방지)</b><br/>🏷️ <b>멀티 디바이스 관리</b><br/>🔄 <b>대화면 몰입형 경험</b><br/>📌 <b>구독 관리 및 채널 정리</b><br/>📥 <b>클라이언트 다운로드:</b><br/> 1、<b><a href="https://mediaplayer.laokhome.cn" >MediaPlayer 클라이언트 다운로드</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
+
+[entry]
+title="MediaPlayer"
+
+[install]
+stepTitle="MediaPlayer 설정"
+helpText="MediaPlayer의 실행 포트와 관리자 비밀번호를 설정하세요. 이 비밀번호는 콘솔 로그인에 사용됩니다. 포트 번호를 잘 모르는 경우 기본값 9527을 유지하는 것이 좋습니다."
+dataDirLabel="영구 APK/문서 디렉토리"
+portLabel="실행 포트"
+passwordLabel="관리자 비밀번호"
+dataDirRequiredMsg="디렉토리는 비워둘 수 없습니다"
+portRequiredMsg="포트 번호는 비워둘 수 없습니다"
+portPatternMsg="포트 번호는 숫자여야 합니다"
+portRangeMsg="유효하지 않은 포트 번호 범위입니다"
+passwordRequiredMsg="관리자 비밀번호는 비워둘 수 없습니다"
+passwordLengthMsg="비밀번호 길이는 6-64자 사이여야 합니다"
+
+[uninstall]
+stepTitle="제거 확인"
+helpText="""<strong>「MediaPlayer」를 제거하고 있습니다</strong><br><br>이 작업은 서비스를 중지하고 주요 프로그램 파일을 제거합니다. 설정 및 미디어 캐시 데이터 처리 방법을 선택하세요:"""
+dataOptionLabel="MediaPlayer 데이터 옵션"
+keepDataLabel="데이터 유지 (권장) - 데이터베이스, 설정 및 캐시를 유지하여 재설치 시 쉽게 복원"
+deleteDataLabel="모든 데이터 삭제 - 모든 설정 및 데이터베이스를 완전히 정리 (복구 불가)"
+selectionRequiredMsg="데이터 처리 옵션을 선택하세요"
+
+[config]
+stepTitle="MediaPlayer 설정 변경"
+helpText="여기서 수정된 매개변수는 현재 실행 중인 설정을 덮어쓰고 자동으로 앱을 다시 시작하여 적용됩니다. 변경하지 않으려면 비워두거나 원래 값을 유지하세요."
+portLabel="새 실행 포트"
+portPlaceholder="변경하지 않으려면 비워두세요"
+passwordLabel="새 관리자 비밀번호"
+passwordPlaceholder="변경하지 않으려면 비워두세요"
+portPatternMsg="포트 번호는 숫자여야 합니다"
+passwordLengthMsg="비밀번호 길이는 6-64자 사이여야 합니다"

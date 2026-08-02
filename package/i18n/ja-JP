@@ -1,0 +1,37 @@
+[common]
+displayName="MediaPlayer"
+desc="""<b>MediaPlayer</b> スマートTVストリーミングメディアセンター。大量の雑多なM3UライブソースとEPG電子番組表を、ケーブルテレビのようにスムーズで整理された視聴体験に変換します。サーバーサイド認証とプロキシ機構により、ホットリンクやパケットキャプチャのリスクを低減します。<br/><br/><b>⚡ 機能ハイライト</b><br/>📝 <b>セキュリティ防御（ホットリンク防止）</b><br/>🏷️ <b>マルチデバイス管理</b><br/>🔄 <b>大画面没入型体験</b><br/>📌 <b>サブスクリプション管理とチャンネル整理</b><br/>📥 <b>クライアントダウンロード：</b><br/> 1、<b><a href="https://mediaplayer.laokhome.cn" >MediaPlayer クライアントをダウンロード</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
+
+[entry]
+title="MediaPlayer"
+
+[install]
+stepTitle="MediaPlayer 設定"
+helpText="MediaPlayerの実行ポートと管理者パスワードを設定してください。このパスワードはコンソールへのログインに使用されます。ポート番号が不明な場合は、デフォルトの9527を推奨します。"
+dataDirLabel="永続化APK/ドキュメントディレクトリ"
+portLabel="実行ポート"
+passwordLabel="管理者パスワード"
+dataDirRequiredMsg="ディレクトリを空にすることはできません"
+portRequiredMsg="ポート番号を空にすることはできません"
+portPatternMsg="ポート番号は数字である必要があります"
+portRangeMsg="無効なポート番号範囲です"
+passwordRequiredMsg="管理者パスワードを空にすることはできません"
+passwordLengthMsg="パスワードの長さは6〜64文字である必要があります"
+
+[uninstall]
+stepTitle="アンインストールの確認"
+helpText="""<strong>「MediaPlayer」をアンインストールしています</strong><br><br>この操作によりサービスが停止し、メインプログラムファイルが削除されます。設定とメディアキャッシュデータの処理方法を選択してください："""
+dataOptionLabel="MediaPlayer データオプション"
+keepDataLabel="データを保持（推奨）- データベース、設定、キャッシュを保持し、次回の再インストールを容易にします"
+deleteDataLabel="すべてのデータを削除 - すべての設定とデータベースを完全にクリーンアップします（元に戻せません）"
+selectionRequiredMsg="データ処理オプションを選択してください"
+
+[config]
+stepTitle="MediaPlayer 設定変更"
+helpText="ここで変更されたパラメータは現在の実行設定を上書きし、自動的にアプリを再起動して反映されます。変更しない場合は空白のままにするか、元の値を保持してください。"
+portLabel="新しい実行ポート"
+portPlaceholder="変更しない場合は空白のまま"
+passwordLabel="新しい管理者パスワード"
+passwordPlaceholder="変更しない場合は空白のまま"
+portPatternMsg="ポート番号は数字である必要があります"
+passwordLengthMsg="パスワードの長さは6〜64文字である必要があります"

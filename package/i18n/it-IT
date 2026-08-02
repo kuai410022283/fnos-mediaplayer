@@ -1,0 +1,37 @@
+[common]
+displayName="MediaPlayer"
+desc="""<b>MediaPlayer</b> Centro multimediale di streaming per Smart TV che trasforma fonti live M3U massive e disordinate e guide elettroniche dei programmi EPG in un'esperienza di visione fluida e organizzata, come la TV via cavo. Grazie all'autenticazione lato server e ai meccanismi di proxy, riduce il rischio di hotlinking e cattura dei pacchetti.<br/><br/><b>⚡ Caratteristiche</b><br/>📝 <b>Protezione di sicurezza (Anti-hotlinking)</b><br/>🏷️ <b>Gestione multi-dispositivo</b><br/>🔄 <b>Esperienza immersiva su grande schermo</b><br/>📌 <b>Gestione abbonamenti e organizzazione canali</b><br/>📥 <b>Download client:</b><br/> 1、<b><a href="https://mediaplayer.laokhome.cn" >Scarica client MediaPlayer</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
+
+[entry]
+title="MediaPlayer"
+
+[install]
+stepTitle="Configurazione MediaPlayer"
+helpText="Imposta la porta di esecuzione e la password amministratore per MediaPlayer. Questa password verrà utilizzata per accedere alla console. Se non sei sicuro del numero di porta, si consiglia di mantenere il valore predefinito 9527."
+dataDirLabel="Directory persistente APK/Documenti"
+portLabel="Porta di esecuzione"
+passwordLabel="Password amministratore"
+dataDirRequiredMsg="La directory non può essere vuota"
+portRequiredMsg="La porta non può essere vuota"
+portPatternMsg="La porta deve essere un numero"
+portRangeMsg="Intervallo di porte non valido"
+passwordRequiredMsg="La password amministratore non può essere vuota"
+passwordLengthMsg="La password deve essere compresa tra 6 e 64 caratteri"
+
+[uninstall]
+stepTitle="Conferma disinstallazione"
+helpText="""<strong>Stai disinstallando "MediaPlayer"</strong><br><br>Questa operazione arresterà il servizio e rimuoverà i file principali del programma. Scegli come gestire i dati di configurazione e cache multimediale:"""
+dataOptionLabel="Opzioni dati MediaPlayer"
+keepDataLabel="Conserva dati (Consigliato) - Mantieni database, configurazione e cache per una facile reinstallazione"
+deleteDataLabel="Elimina tutti i dati - Pulisci completamente tutte le configurazioni e il database (irreversibile)"
+selectionRequiredMsg="Seleziona un'opzione di gestione dei dati"
+
+[config]
+stepTitle="Modifica impostazioni MediaPlayer"
+helpText="I parametri modificati qui sovrascriveranno la configurazione corrente e riavvieranno automaticamente l'app. Lascia vuoto o mantieni il valore originale se non sono necessarie modifiche."
+portLabel="Nuova porta di esecuzione"
+portPlaceholder="Lascia vuoto se nessuna modifica"
+passwordLabel="Nuova password amministratore"
+passwordPlaceholder="Lascia vuoto se nessuna modifica"
+portPatternMsg="La porta deve essere un numero"
+passwordLengthMsg="La password deve essere compresa tra 6 e 64 caratteri"

@@ -1,0 +1,37 @@
+[common]
+displayName="MediaPlayer"
+desc="""<b>MediaPlayer</b> Smart-TV-Streaming-Media-Center, das massenhafte, unübersichtliche M3U-Livequellen und EPG-Programmführer in ein reibungsloses, organisiertes Fernseherlebnis verwandelt. Durch serverseitige Authentifizierung und Proxy-Mechanismen wird das Risiko von Hotlinking und Paketanalyse reduziert.<br/><br/><b>⚡ Funktionen</b><br/>📝 <b>Sicherheitsschutz (Anti-Hotlinking)</b><br/>🏷️ <b>Multi-Geräte-Verwaltung</b><br/>🔄 <b>Immersives Großbild-Erlebnis</b><br/>📌 <b>Abonnementverwaltung &amp; Kanalsortierung</b><br/>📥 <b>Client-Download:</b><br/> 1、<b><a href="https://mediaplayer.laokhome.cn" >MediaPlayer Client herunterladen</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
+
+[entry]
+title="MediaPlayer"
+
+[install]
+stepTitle="MediaPlayer Konfiguration"
+helpText="Bitte legen Sie den Port und das Administrator-Passwort für MediaPlayer fest. Dieses Passwort wird für die Anmeldung an der Konsole verwendet. Wenn Sie sich beim Port nicht sicher sind, wird empfohlen, den Standardport 9527 beizubehalten."
+dataDirLabel="Persistenter APK-/Dokumentenordner"
+portLabel="Port"
+passwordLabel="Administrator-Passwort"
+dataDirRequiredMsg="Verzeichnis darf nicht leer sein"
+portRequiredMsg="Port darf nicht leer sein"
+portPatternMsg="Port muss eine Zahl sein"
+portRangeMsg="Ungültiger Portbereich"
+passwordRequiredMsg="Administrator-Passwort darf nicht leer sein"
+passwordLengthMsg="Passwort muss zwischen 6 und 64 Zeichen lang sein"
+
+[uninstall]
+stepTitle="Deinstallation bestätigen"
+helpText="""<strong>Sie deinstallieren „MediaPlayer"</strong><br><br>Dieser Vorgang beendet den Dienst und entfernt die Hauptprogrammdateien. Bitte wählen Sie, wie mit Ihren Konfigurations- und Medien-Cache-Daten verfahren werden soll:"""
+dataOptionLabel="MediaPlayer Datenoptionen"
+keepDataLabel="Daten behalten (Empfohlen) - Datenbank, Konfiguration und Cache für einfache Neuinstallation behalten"
+deleteDataLabel="Alle Daten löschen - Alle Konfigurationen und Datenbanken vollständig bereinigen (unwiderruflich)"
+selectionRequiredMsg="Bitte wählen Sie eine Datenbehandlungsoption"
+
+[config]
+stepTitle="MediaPlayer Einstellungen ändern"
+helpText="Hier geänderte Parameter überschreiben die aktuelle Konfiguration und starten die App automatisch neu. Lassen Sie das Feld leer oder behalten Sie den ursprünglichen Wert bei, wenn keine Änderung erforderlich ist."
+portLabel="Neuer Port"
+portPlaceholder="Leer lassen, wenn keine Änderung"
+passwordLabel="Neues Administrator-Passwort"
+passwordPlaceholder="Leer lassen, wenn keine Änderung"
+portPatternMsg="Port muss eine Zahl sein"
+passwordLengthMsg="Passwort muss zwischen 6 und 64 Zeichen lang sein"
