@@ -1,6 +1,6 @@
 [common]
 displayName="MediaPlayer"
-desc="""<b>MediaPlayer</b> 智慧電視串流媒體中心，可將大量、雜亂的 M3U 直播源和 EPG 電子節目表，轉化為如同有線電視般順暢、有組織的觀看體驗。透過引入伺服器端驗證與代理機制，幫助降低直播源被盜鏈、被抓包的風險。<br/><br/><b>⚡ 功能亮點</b><br/>📝 <b>安全防禦（防盜鏈）</b><br/>🏷️ <b>多端裝置管控</b><br/>🔄 <b>大螢幕沉浸式體驗</b><br/>📌 <b>訂閱託管與頻道整理</b><br/>📥 <b>用戶端下載：</b><br/> 1、<b><a href="https://mediaplayer.laokhome.cn" >下載 MediaPlayer 用戶端</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
+desc="""<b>MediaPlayer</b> 智慧電視串流媒體中心，可將大量、雜亂的 M3U 直播源和 EPG 電子節目表，轉化為如同有線電視般順暢、有組織的觀看體驗。透過引入伺服器端驗證與代理機制，幫助降低直播源被盜鏈、被抓包的風險。<br/><br/><b>⚡ 功能亮點</b><br/>📝 <b>安全防禦（防盜鏈）</b><br/>🏷️ <b>多端裝置管控</b><br/>🔄 <b>大螢幕沉浸式體驗</b><br/>📌 <b>訂閱託管與頻道整理</b><br/>📥 <b>用戶端下載：</b><br/> 1、<b><a href="https://github.com/kuai410022283/mediaplayer/releases" >下載 MediaPlayer 用戶端</a> </b><br/><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/player02.png" alt="MediaPlayer" style="margin-top:0.3em"><img width="100%" height="auto" src="https://cdn.gh-proxy.org/https://raw.githubusercontent.com/kuai410022283/mediaplayer/main/images/home01.png" alt="MediaPlayer" style="margin-top:0.3em">"""
 
 [entry]
 title="MediaPlayer"
