@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer 配置"
 helpText="请设置 MediaPlayer 的运行端口和管理员密码。该密码将用于登录控制台。如果不确定端口号，建议保持默认的 9527。"
-dataDirLabel="持久化APK/文档目录"
+dataDirLabel="安装目录(请手动设置目录权限为可读写)"
 portLabel="运行端口"
 passwordLabel="管理员密码"
 dataDirRequiredMsg="目录不能为空 "

@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer Configuration"
 helpText="Please set the running port and admin password for MediaPlayer. This password will be used to log in to the console. If unsure about the port number, it is recommended to keep the default 9527."
-dataDirLabel="Persistent APK/Document Directory"
+dataDirLabel="Installation Directory (Please manually set directory permissions to read/write)"
 portLabel="Running Port"
 passwordLabel="Admin Password"
 dataDirRequiredMsg="Directory cannot be empty"

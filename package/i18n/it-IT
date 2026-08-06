@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="Configurazione MediaPlayer"
 helpText="Imposta la porta di esecuzione e la password amministratore per MediaPlayer. Questa password verrà utilizzata per accedere alla console. Se non sei sicuro del numero di porta, si consiglia di mantenere il valore predefinito 9527."
-dataDirLabel="Directory persistente APK/Documenti"
+dataDirLabel="Directory di installazione (Impostare manualmente i permessi della directory in lettura/scrittura)"
 portLabel="Porta di esecuzione"
 passwordLabel="Password amministratore"
 dataDirRequiredMsg="La directory non può essere vuota"

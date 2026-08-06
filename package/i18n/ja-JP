@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer 設定"
 helpText="MediaPlayerの実行ポートと管理者パスワードを設定してください。このパスワードはコンソールへのログインに使用されます。ポート番号が不明な場合は、デフォルトの9527を推奨します。"
-dataDirLabel="永続化APK/ドキュメントディレクトリ"
+dataDirLabel="インストールディレクトリ(ディレクトリの権限を手動で読み書き可能に設定してください)"
 portLabel="実行ポート"
 passwordLabel="管理者パスワード"
 dataDirRequiredMsg="ディレクトリを空にすることはできません"

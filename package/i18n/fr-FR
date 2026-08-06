@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="Configuration de MediaPlayer"
 helpText="Veuillez définir le port d'exécution et le mot de passe administrateur pour MediaPlayer. Ce mot de passe sera utilisé pour se connecter à la console. En cas de doute sur le numéro de port, il est recommandé de conserver le port par défaut 9527."
-dataDirLabel="Répertoire persistant APK/Documents"
+dataDirLabel="Répertoire d'installation (Veuillez définir manuellement les autorisations du répertoire en lecture/écriture)"
 portLabel="Port d'exécution"
 passwordLabel="Mot de passe administrateur"
 dataDirRequiredMsg="Le répertoire ne peut pas être vide"

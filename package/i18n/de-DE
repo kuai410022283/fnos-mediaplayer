@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer Konfiguration"
 helpText="Bitte legen Sie den Port und das Administrator-Passwort für MediaPlayer fest. Dieses Passwort wird für die Anmeldung an der Konsole verwendet. Wenn Sie sich beim Port nicht sicher sind, wird empfohlen, den Standardport 9527 beizubehalten."
-dataDirLabel="Persistenter APK-/Dokumentenordner"
+dataDirLabel="Installationsverzeichnis (Bitte Verzeichnisberechtigungen manuell auf Lesen/Schreiben setzen)"
 portLabel="Port"
 passwordLabel="Administrator-Passwort"
 dataDirRequiredMsg="Verzeichnis darf nicht leer sein"

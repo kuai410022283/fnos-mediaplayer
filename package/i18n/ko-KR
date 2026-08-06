@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer 설정"
 helpText="MediaPlayer의 실행 포트와 관리자 비밀번호를 설정하세요. 이 비밀번호는 콘솔 로그인에 사용됩니다. 포트 번호를 잘 모르는 경우 기본값 9527을 유지하는 것이 좋습니다."
-dataDirLabel="영구 APK/문서 디렉토리"
+dataDirLabel="설치 디렉토리(디렉토리 권한을 수동으로 읽기/쓰기로 설정하세요)"
 portLabel="실행 포트"
 passwordLabel="관리자 비밀번호"
 dataDirRequiredMsg="디렉토리는 비워둘 수 없습니다"

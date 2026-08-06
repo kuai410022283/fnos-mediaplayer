@@ -8,7 +8,7 @@ title="MediaPlayer"
 [install]
 stepTitle="MediaPlayer 設定"
 helpText="請設定 MediaPlayer 的執行連接埠和管理員密碼。該密碼將用於登入控制台。如果不確定連接埠號，建議保持預設的 9527。"
-dataDirLabel="持久化 APK/文件目錄"
+dataDirLabel="安裝目錄(請手動設定目錄權限為可讀寫)"
 portLabel="執行連接埠"
 passwordLabel="管理員密碼"
 dataDirRequiredMsg="目錄不能為空"
