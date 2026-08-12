@@ -36,4 +36,4 @@ chmod +x build.sh
 
 ## 📄 开源协议
 
-遵循 [MIT License](LICENSE)。
+遵循 [License](LICENSE)。
